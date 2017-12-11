@@ -18,12 +18,14 @@ let input = [
 ]
 
 func checksum(input: [Int]) -> Int {
-    var min = Int.max, max = 0;
-    input.forEach { i in
-        min = i < min ? i : min
-        max = i > max ? i : max
-    }
-    return max - min;
+    let extremes = input.reduce((min: Int.max, max: 0), { e, i in
+        return (
+            min: i < e.min ? i : e.min,
+            max: i > e.max ? i : e.max
+        )
+    })
+
+    return extremes.max - extremes.min;
 }
 
 let sum = input.reduce(0, { a, b in 
