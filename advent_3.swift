@@ -1,5 +1,3 @@
-let input = 277678
-
 func findShortestPath(input: Int) -> Int {
     let gridWidth = findGridWidth(step: input)
 
@@ -47,5 +45,4 @@ func findGridWidth(step: Int) -> Int {
     }
 }
 
-
-print(findShortestPath(input: input))
+print(findShortestPath(input: 277678))
