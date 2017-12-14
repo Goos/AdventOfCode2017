@@ -18,18 +18,39 @@ let input = [
 ]
 
 func checksum(input: [Int]) -> Int {
-    let extremes = input.reduce((min: Int.max, max: 0), { e, i in
+    let extremes = input.reduce((min: Int.max, max: 0), { e, val in
         return (
-            min: i < e.min ? i : e.min,
-            max: i > e.max ? i : e.max
+            min: val < e.min ? val : e.min,
+            max: val > e.max ? val : e.max
         )
     })
 
     return extremes.max - extremes.min;
 }
 
-let sum = input.reduce(0, { a, b in 
-    return a + checksum(input: b)
+func divisibleChecksum(input: [Int]) -> Int {
+    let indexedInput = input.enumerated()
+    return indexedInput.reduce(0, { sum, indexedVal in
+        let (index, val) = indexedVal
+        var result: Int? = nil
+
+        for (index2, val2) in indexedInput {
+            if index != index2 && val % val2 == 0 {
+                result = val / val2
+                break
+            }
+        }
+
+        return result != nil ? sum + result! : sum
+    })
+}
+
+let sums = input.reduce((0, 0), { a, b in 
+    let (sum, divisibleSum) = a
+    return (
+        sum + checksum(input: b),
+        divisibleSum + divisibleChecksum(input: b)
+    )
 })
 
-print(sum)
+print(sums)

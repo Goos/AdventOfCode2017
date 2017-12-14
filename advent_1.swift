@@ -13,7 +13,7 @@ func sum(input: String) -> UInt32 {
     })
 }
 
-func sum_circular(input: String) -> UInt32 {
+func circularSum(input: String) -> UInt32 {
     let base: UInt32 = 48
 
     let scalars = input.unicodeScalars
@@ -32,4 +32,4 @@ func sum_circular(input: String) -> UInt32 {
 }
 
 print(sum(input: input))
-print(sum_circular(input: input))
+print(circularSum(input: input))
